@@ -51,7 +51,15 @@
                 return false;
             }
 
-
+            public bool SerachBook(Book book)
+            {
+                if (book != null)
+                {
+                    books.Add(book);
+                    return true;
+                }
+                return false;
+            }
         }
 
 
