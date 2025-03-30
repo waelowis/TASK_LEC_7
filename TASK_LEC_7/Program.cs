@@ -9,6 +9,7 @@
             string ISBN;
             bool Availability;
 
+
             public Book(string title, string author, string iSBN, bool availability = true)
             {
                 this.title = title;
@@ -16,13 +17,13 @@
                 ISBN = iSBN;
                 Availability = availability;
             }
+
+
             public string AllData()
             {
                 return $"Book Name : {title}\nauthor : {author}\nISBN : {ISBN}\navailability : {Availability}";
             }
         }
-
-
 
         class Library
         {
@@ -45,25 +46,31 @@
             {
                 if (book != null)
                 {
-                    books.Add(book);
+                    books.Remove(book);
                     return true;
                 }
                 return false;
             }
 
-            public bool SerachBook(Book book)
+            public Book BorrowBook(string Text)
             {
-                if (book != null)
+                if (!string.IsNullOrEmpty(Text))
                 {
-                    books.Add(book);
-                    return true;
+
                 }
-                return false;
+
+
             }
+
+
+            public Book ReturnBook(string Text)
+            {
+
+            }
+
+
+
         }
-
-
-
 
 
         static void Main(string[] args)
