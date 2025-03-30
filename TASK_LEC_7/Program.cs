@@ -29,6 +29,10 @@
         {
             List<Book> books = new List<Book>();
 
+            public Library(List<Book> books)
+            {
+                this.books = books;
+            }
 
             public bool AddBook(Book book)
             {
