@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace TASK_LEC_7
+﻿namespace TASK_LEC_7
 {
     internal class Program
     {
@@ -25,17 +23,22 @@ namespace TASK_LEC_7
             {
                 return $"Book Name : {title}\nauthor : {author}\nISBN : {ISBN}\navailability : {Availability}";
             }
+
+            public bool Available()
+            {
+                return Availability;
+            }
         }
 
         class Library
         {
             List<Book> books = new List<Book>();
 
-            public Book Serach(string text)
+            public Book Search(string text)
             {
                 for (int i = 0; i < books.Count; i++)
                 {
-                    if (books[i].AllData().ToLower() == text.ToLower() || books[i].AllData().ToLower() == text)
+                    if (books[i].AllData().ToLower().Contains(text.ToLower()))
                     {
                         return books[i];
                     }
@@ -53,8 +56,8 @@ namespace TASK_LEC_7
             public bool RemoveBook(string text)
             {
 
-                Book book = Serach(text);
-                if (book != null)
+                Book book = Search(text);
+                if (book != null && book.Available())
                 {
                     books.Remove(book);
                     return true;
@@ -65,8 +68,8 @@ namespace TASK_LEC_7
 
             public bool BorrowBook(string text)
             {
-                Book book = Serach(text);
-                if (book != null)
+                Book book = Search(text);
+                if (book != null && book.Available())
                 {
 
                     return true;
@@ -79,8 +82,8 @@ namespace TASK_LEC_7
             public bool ReturnBook(string text)
             {
 
-                Book book = Serach(text);
-                if (book != null)
+                Book book = Search(text);
+                if (book != null && !book.Available())
                 {
 
                     return false;
@@ -108,7 +111,7 @@ namespace TASK_LEC_7
             Console.WriteLine("\nReturning books...");
             library.ReturnBook("Gatsby");
             library.ReturnBook("Harry Potter");
-    
+
             Console.ReadLine();
         }
     }
