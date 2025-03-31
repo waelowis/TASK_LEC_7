@@ -1,4 +1,6 @@
-﻿namespace TASK_LEC_7
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace TASK_LEC_7
 {
     internal class Program
     {
@@ -29,47 +31,63 @@
         {
             List<Book> books = new List<Book>();
 
-
-
-            public bool AddBook(Book book)
+            public Book Serach(string text)
             {
-
-                if (book != null)
+                for (int i = 0; i < books.Count; i++)
                 {
-                    books.Add(book);
-                    return true;
+                    if (books[i].AllData().ToLower() == text.ToLower() || books[i].AllData().ToLower() == text)
+                    {
+                        return books[i];
+                    }
                 }
-                return false;
-
+                return null;
             }
 
-            public bool RemoveBook(Book book)
+            public void AddBook(Book book)
             {
+                books.Add(book);
+            }
+
+
+
+            public bool RemoveBook(string text)
+            {
+
+                Book book = Serach(text);
                 if (book != null)
                 {
                     books.Remove(book);
                     return true;
                 }
                 return false;
+
             }
 
-            public Book BorrowBook(string Text)
+            public bool BorrowBook(string text)
             {
-                if (!string.IsNullOrEmpty(Text))
+                Book book = Serach(text);
+                if (book != null)
                 {
 
+                    return true;
                 }
-
+                return false;
 
             }
 
 
-            public Book ReturnBook(string Text)
+            public bool ReturnBook(string text)
             {
 
+                Book book = Serach(text);
+                if (book != null)
+                {
+
+                    return false;
+                }
+                return true;
+
             }
-
-
 
         }
 
@@ -90,7 +108,7 @@
             Console.WriteLine("\nReturning books...");
             library.ReturnBook("Gatsby");
             library.ReturnBook("Harry Potter");
-
+    
             Console.ReadLine();
         }
     }
